@@ -23,4 +23,6 @@ public interface ReadersFacade  {
     
     public void deleteReader(Readers reader);
     
+    public Readers getReaderById(Integer id);
+    
 }

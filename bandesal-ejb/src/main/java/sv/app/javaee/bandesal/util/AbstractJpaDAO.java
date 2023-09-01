@@ -162,6 +162,7 @@ public abstract class AbstractJpaDAO<T> implements Serializable {
         try {
             getEntityManager().persist(entity);
         } catch (Exception e) {
+            e.printStackTrace();
             log.error(this.createLogMessage("Error en crear registros en BD: ", e.getMessage(), CREATE));
         }
     }

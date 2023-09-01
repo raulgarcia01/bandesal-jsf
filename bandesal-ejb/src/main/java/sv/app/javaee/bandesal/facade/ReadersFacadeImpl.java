@@ -41,4 +41,9 @@ public class ReadersFacadeImpl extends AbstractJpaDAO<Readers> implements Reader
         super.delete(reader);
     }
 
+    @Override
+    public Readers getReaderById(Integer id) {
+        return super.getById(id);
+    }
+
 }

@@ -35,8 +35,7 @@
 
                         <p:toolbar styleClass="mb-4">
                             <p:toolbarGroup>
-                                <p:commandButton value="New" icon="pi pi-plus" actionListener="#{readersBean.openNew()}" 
-                                                 update="manage-reader-content" oncomplete="PF('manageReaderDialog').show()" 
+                                <p:commandButton value="New" icon="pi pi-plus" action="/prueba" 
                                                  styleClass="ui-button-success" style="margin-right: .5rem" />
                             </p:toolbarGroup>
                         </p:toolbar>
@@ -61,28 +60,10 @@
                                 <h:outputText value="#{reader.name}" />
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Edit" action="#{readersBean.updateReader(reader)}"
-                                                 oncomplete="PF('manageReaderDialog').show()"/>
                                 <p:commandButton value="Delete" action="#{readersBean.deleteReader(reader)}" />
                             </p:column>
 
                         </p:dataTable>
-
-                        <p:dialog header="Reader Details" showEffect="fade" modal="true" widgetVar="manageReaderDialog" responsive="true">
-                            <p:outputPanel id="manage-reader-content" class="ui-fluid">
-                                <p:outputPanel rendered="#{not empty readersBean.selectedReader}">
-                                    <div class="field">
-                                        <p:outputLabel for="name">Name</p:outputLabel>
-                                        <p:inputText id="name" value="#{readersBean.selectedReader.name}" required="true" />
-                                    </div>
-                                </p:outputPanel>
-                            </p:outputPanel>
-
-                            <f:facet name="footer">
-                                <p:commandButton value="Save" icon="pi pi-check" actionListener="#{readersBean.saveReader()}" update="manage-reader-content" process="@this" />
-                                <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageReaderDialog').hide()" class="ui-button-secondary" />
-                            </f:facet>
-                        </p:dialog> 
                     </div>
                 </div>
             </div>

@@ -1,13 +1,16 @@
 package sv.app.javaee.bandesal.web;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import org.primefaces.PrimeFaces;
 import sv.app.javaee.bandesal.facade.ReadersFacade;
 import sv.app.javaee.bandesal.model.Readers;
@@ -17,8 +20,8 @@ import sv.app.javaee.bandesal.model.Readers;
  *
  * @author Raul Garcia
  */
-@ManagedBean
-@SessionScoped
+@Named(value = "readersBean")
+@ViewScoped
 public class ReadersBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,15 +36,19 @@ public class ReadersBean implements Serializable {
     @PostConstruct
     public void init() {
         this.readers = this.readerService.getAllReaders();
+        this.selectedReader = new Readers();
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+                .getRequest();
+        String id = request.getParameter("id");
+        
     }
 
     public void openNew() {
         this.selectedReader = new Readers();
     }
 
-    public void saveReader() {
+    public void saveReader() throws IOException {
         System.out.println("Entra");
-        System.out.println(selectedReader);
         if (this.selectedReader.getId() == null) {
             this.readerService.addReader(selectedReader);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Readers Added"));
@@ -49,9 +56,7 @@ public class ReadersBean implements Serializable {
             this.readerService.updateReader(selectedReader);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Readers Updated"));
         }
-
-        PrimeFaces.current().executeScript("PF('manageReadersDialog').hide()");
-        PrimeFaces.current().ajax().update("form:messages", "form:dt-readers");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("readers.xhtml");
     }
 
     public void deleteReader(Readers itemSelected) {
@@ -61,9 +66,9 @@ public class ReadersBean implements Serializable {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-readers");
     }
 
-    public void updateReader(Readers itemSelected) {
+    public void updateReader(Readers itemSelected) throws IOException {
         this.selectedReader = itemSelected;
-        System.out.println("this.selectedReader: " + this.selectedReader);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("editReader.xhtml?id=" + itemSelected.getId());
     }
 
     public List<Readers> getReaders() {
