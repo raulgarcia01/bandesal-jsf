@@ -11,6 +11,7 @@
     </h:head>
     <h:body>
         <h:form id="simpleForm">
+            <p:messages id="msgs"/>
             <p:outputPanel class="ui-fluid">
                 <div class="field">
                     <p:outputLabel for="title">Title:</p:outputLabel>
@@ -20,8 +21,7 @@
                     <p:outputLabel for="description">Description:</p:outputLabel>
                     <p:inputText id="description" value="#{blogsBean.selectedBlog.description}" required="true" />
                 </div>
-                <p:commandButton value="Guardar" action="#{blogsBean.saveBlog()}"/>
-                <p:messages />
+                <p:commandButton value="Guardar" action="#{blogsBean.saveBlog()}" update="@form"/>
             </p:outputPanel>
         </h:form>
     </h:body>
