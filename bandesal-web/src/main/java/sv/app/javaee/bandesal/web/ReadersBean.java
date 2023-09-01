@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -40,7 +39,10 @@ public class ReadersBean implements Serializable {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
                 .getRequest();
         String id = request.getParameter("id");
-        
+        System.out.println("ID: " + id);
+        if (id != null) {
+            this.selectedReader = this.readerService.getReaderById(Integer.parseInt(id));
+        }
     }
 
     public void openNew() {

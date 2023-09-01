@@ -15,7 +15,7 @@ import sv.app.javaee.bandesal.model.Readers;
 @Local
 public interface ReadersFacade  {
     
-    List<Readers> getAllReaders();
+    public List<Readers> getAllReaders();
     
     public void addReader(Readers reader);
     

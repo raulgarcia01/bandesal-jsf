@@ -6,17 +6,21 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Editar Readers</title>
+        <title>Agregar Blogs</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
         <h:form id="simpleForm">
             <p:outputPanel class="ui-fluid">
                 <div class="field">
-                    <p:outputLabel for="name">Name:</p:outputLabel>
-                    <p:inputText id="name" value="#{readersBean.selectedReader.name}" />
+                    <p:outputLabel for="title">Title:</p:outputLabel>
+                    <p:inputText id="title" value="#{blogsBean.selectedBlog.title}" required="true"  />
                 </div>
-                <p:commandButton value="Guardar" action="#{readersBean.saveReader()}"/>
+                <div class="field">
+                    <p:outputLabel for="description">Description:</p:outputLabel>
+                    <p:inputText id="description" value="#{blogsBean.selectedBlog.description}" required="true" />
+                </div>
+                <p:commandButton value="Guardar" action="#{blogsBean.saveBlog()}"/>
                 <p:messages />
             </p:outputPanel>
         </h:form>

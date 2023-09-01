@@ -6,13 +6,19 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>TODO supply a title</title>
+        <title>Agregar Readers</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
         <h:form id="simpleForm">
-            <p:inputText id="name" value="#{readersBean.selectedReader.name}" />
-            <p:commandButton value="Guardar" action="#{readersBean.saveReader()}"/>
+            <p:outputPanel class="ui-fluid">
+                <div class="field">
+                    <p:outputLabel for="name">Name:</p:outputLabel>
+                    <p:inputText id="name" value="#{readersBean.selectedReader.name}" />
+                </div>
+                <p:commandButton value="Guardar" action="#{readersBean.saveReader()}"/>
+                <p:messages />
+            </p:outputPanel>
         </h:form>
     </h:body>
 </html>

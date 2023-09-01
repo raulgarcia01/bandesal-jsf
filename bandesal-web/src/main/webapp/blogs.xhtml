@@ -5,13 +5,13 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
-    <ui:define name="title">Readers</ui:define>
+    <ui:define name="title">Blogs</ui:define>
     <ui:define name="menu">
         <h:form>
             <h:panelGrid columns="3" id="panelMaster" style="width: 105%;border:0;text-align: right;">
                 <p:panel id="controlPanel" style="width:96%;border:0;">
                     <p:panel id="botonesPanel" style="border:0;">
-                        <p:commandButton id="menuGoToReaders"  
+                         <p:commandButton id="menuGoToReaders"  
                                          icon="pi pi-bookmark" iconPos="right" 
                                          styleClass="rounded-button ui-button-info mr-2 mb-2" 
                                          value="Ir a Inicio" action="index" />
@@ -35,33 +35,36 @@
 
                         <p:toolbar styleClass="mb-4">
                             <p:toolbarGroup>
-                                <p:commandButton value="New" icon="pi pi-plus" action="/addReader" 
+                                <p:commandButton value="New" icon="pi pi-plus" action="/addBlog" 
                                                  styleClass="ui-button-success" style="margin-right: .5rem" />
                             </p:toolbarGroup>
                         </p:toolbar>
 
-                        <p:dataTable id="dt-readers" widgetVar="dtReaders" var="reader" value="#{readersBean.readers}" reflow="true" styleClass="readers-table"
-                                     selection="#{readersBean.selectedReader}" rowKey="#{reader.id}" 
+                        <p:dataTable id="dt-blogs" widgetVar="dtBlogs" var="blog" value="#{blogsBean.blogs}" reflow="true" styleClass="blogs-table"
+                                     selection="#{blogsBean.selectedBlog}" rowKey="#{blog.id}" 
                                      selectionMode="single" rowSelectMode="new" paginator="true" rows="10" paginatorPosition="bottom">
                             <f:facet name="header">
-                                <div class="readers-table-header">
-                                    <span style="font-weight: bold">Mantenimiento de Readers</span>
+                                <div class="blogs-table-header">
+                                    <span style="font-weight: bold">Mantenimiento de Blogs</span>
                                     <span class="filter-container ui-input-icon-right">
                                         <i class="pi pi-search"></i>
-                                        <p:inputText id="globalFilter" onkeyup="PF('dtReaders').filter()" placeholder="Search" />
+                                        <p:inputText id="globalFilter" onkeyup="PF('dtBlogs').filter()" placeholder="Search" />
                                     </span>
                                 </div>
                             </f:facet>
 
-                            <p:column headerText="Id" sortBy="#{reader.id}" filterBy="#{reader.id}">
-                                <h:outputText value="#{reader.id}" />
+                            <p:column headerText="Id" sortBy="#{blog.id}" filterBy="#{blog.id}">
+                                <h:outputText value="#{blog.id}" />
                             </p:column>
-                            <p:column headerText="Name" sortBy="#{reader.name}" filterBy="#{reader.name}">
-                                <h:outputText value="#{reader.name}" />
+                            <p:column headerText="Title" sortBy="#{blog.title}" filterBy="#{blog.title}">
+                                <h:outputText value="#{blog.title}" />
+                            </p:column>
+                            <p:column headerText="Description" sortBy="#{blog.description}" filterBy="#{blog.description}">
+                                <h:outputText value="#{blog.description}" />
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Edit" action="#{readersBean.updateReader(reader)}"/>
-                                <p:commandButton value="Delete" action="#{readersBean.deleteReader(reader)}" />
+                                <p:commandButton value="Edit" action="#{blogsBean.updateBlog(blog)}"/>
+                                <p:commandButton value="Delete" action="#{blogsBean.deleteBlog(blog)}" />
                             </p:column>
 
                         </p:dataTable>
