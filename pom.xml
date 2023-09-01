@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>sv.app.javaee</groupId>
+    <artifactId>bandesal</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    
+    <!-- Desarrolladores del Proyecto -->
+    <developers>
+        <developer>
+            <id>javadev</id>
+            <name>Raul Garcia</name>
+            <email>raulgarcia01@gmail.com</email>
+        </developer>
+    </developers>
+    
+    <!-- Modulos del Proyecto -->
+    <modules>
+        <module>bandesal-ear</module>
+        <module>bandesal-web</module>
+        <module>bandesal-ejb</module>
+    </modules>
+    
+    <!-- Propiedades Generales -->
+    <properties>
+        <!-- Common -->    
+        <lombok.version>1.18.24</lombok.version> 
+        <!-- Testing -->    
+        <junit.version>4.12</junit.version>
+        <!-- Encoding-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Compiler conf -->
+        <java.compiler.version>3.1</java.compiler.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- Plugins -->
+        <ejb.version>3.1</ejb.version>
+        <ejb-plugin.version>2.3</ejb-plugin.version>
+        <war-plugin.version>2.3</war-plugin.version>
+        <!-- Logging -->
+        <log4j.api.version>2.6.1</log4j.api.version>
+        <log4j.core.version>2.6.1</log4j.core.version>
+    </properties>
+    
+    <!-- Dependencias Generales -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Dependencias para Produccion -->
+        
+            <!-- Lombok API -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+        
+            <!-- Dependencias para Test -->
+        
+            <!-- JUnit 4 API -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            
+            <!-- Logging Log4J -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.core.version}</version>
+            </dependency>
+            
+        </dependencies>
+    </dependencyManagement>
+    
+    <!-- Plugins Generales -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Maven Java Compiler -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${java.compiler.version}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+                <!-- Maven EJB Compiler -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ejb-plugin</artifactId>
+                    <version>${ejb-plugin.version}</version>
+                    <configuration>
+                        <ejbVersion>${ejb.version}</ejbVersion>
+                    </configuration>
+                </plugin>
+                <!-- Maven WAR Compiler -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${war-plugin.version}</version>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

@@ -1,0 +1,91 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Readers</ui:define>
+    <ui:define name="menu">
+        <h:form>
+            <h:panelGrid columns="3" id="panelMaster" style="width: 105%;border:0;text-align: right;">
+                <p:panel id="controlPanel" style="width:96%;border:0;">
+                    <p:panel id="botonesPanel" style="border:0;">
+                        <p:commandButton id="menuGoToReaders"  
+                                         icon="pi pi-bookmark" iconPos="right" 
+                                         styleClass="rounded-button ui-button-info mr-2 mb-2" 
+                                         value="Ir a Inicio" action="index" />
+                        <p:commandButton id="menuGoToBlogs"  icon="pi pi-bookmark" iconPos="right"
+                                         styleClass="rounded-button ui-button-info mr-2 mb-2"
+                                         value="Ir a Blogs" action="blogs" />
+                        <p:commandButton id="menuGoToReadersBlogs" icon="pi pi-bookmark" iconPos="right"
+                                         styleClass="rounded-button ui-button-info mr-2 mb-2"
+                                         value="Readers por blog" action="readersBlogs" />
+                    </p:panel>
+                </p:panel>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="form">
+            <div class="grid crud-demo">
+                <div class="col-12">
+                    <div class="card">
+                        <p:growl id="messages" showDetail="true" />
+
+                        <p:toolbar styleClass="mb-4">
+                            <p:toolbarGroup>
+                                <p:commandButton value="New" icon="pi pi-plus" actionListener="#{readersBean.openNew()}" 
+                                                 update="manage-reader-content" oncomplete="PF('manageReaderDialog').show()" 
+                                                 styleClass="ui-button-success" style="margin-right: .5rem" />
+                            </p:toolbarGroup>
+                        </p:toolbar>
+
+                        <p:dataTable id="dt-readers" widgetVar="dtReaders" var="reader" value="#{readersBean.readers}" reflow="true" styleClass="readers-table"
+                                     selection="#{readersBean.selectedReader}" rowKey="#{reader.id}" 
+                                     selectionMode="single" rowSelectMode="new" paginator="true" rows="10" paginatorPosition="bottom">
+                            <f:facet name="header">
+                                <div class="readers-table-header">
+                                    <span style="font-weight: bold">Mantenimiento de Readers</span>
+                                    <span class="filter-container ui-input-icon-right">
+                                        <i class="pi pi-search"></i>
+                                        <p:inputText id="globalFilter" onkeyup="PF('dtReaders').filter()" placeholder="Search" />
+                                    </span>
+                                </div>
+                            </f:facet>
+
+                            <p:column headerText="Id" sortBy="#{reader.id}" filterBy="#{reader.id}">
+                                <h:outputText value="#{reader.id}" />
+                            </p:column>
+                            <p:column headerText="Name" sortBy="#{reader.name}" filterBy="#{reader.name}">
+                                <h:outputText value="#{reader.name}" />
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Edit" action="#{readersBean.updateReader(reader)}"
+                                                 oncomplete="PF('manageReaderDialog').show()"/>
+                                <p:commandButton value="Delete" action="#{readersBean.deleteReader(reader)}" />
+                            </p:column>
+
+                        </p:dataTable>
+
+                        <p:dialog header="Reader Details" showEffect="fade" modal="true" widgetVar="manageReaderDialog" responsive="true">
+                            <p:outputPanel id="manage-reader-content" class="ui-fluid">
+                                <p:outputPanel rendered="#{not empty readersBean.selectedReader}">
+                                    <div class="field">
+                                        <p:outputLabel for="name">Name</p:outputLabel>
+                                        <p:inputText id="name" value="#{readersBean.selectedReader.name}" required="true" />
+                                    </div>
+                                </p:outputPanel>
+                            </p:outputPanel>
+
+                            <f:facet name="footer">
+                                <p:commandButton value="Save" icon="pi pi-check" actionListener="#{readersBean.saveReader()}" update="manage-reader-content" process="@this" />
+                                <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageReaderDialog').hide()" class="ui-button-secondary" />
+                            </f:facet>
+                        </p:dialog> 
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

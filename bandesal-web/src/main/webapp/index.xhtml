@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Menu Principal - Web App JSF</ui:define>
+    <ui:define name="menu">
+        <h:form>
+            <h:panelGrid columns="3" id="panelMaster" style="width: 105%;border:0;text-align: right;">
+                <p:panel id="controlPanel" style="width:96%;border:0;">
+                    <p:panel id="botonesPanel" style="border:0;">
+                        <p:commandButton id="menuGoToReaders"  
+                                         icon="pi pi-bookmark" iconPos="right" 
+                                         styleClass="rounded-button ui-button-info mr-2 mb-2" 
+                                         value="Ir a Readers" action="readers" />
+                        <p:commandButton id="menuGoToBlogs"  icon="pi pi-bookmark" iconPos="right"
+                                         styleClass="rounded-button ui-button-info mr-2 mb-2"
+                                         value="Ir a Blogs" action="blogs" />
+                        <p:commandButton id="menuGoToReadersBlogs" icon="pi pi-bookmark" iconPos="right"
+                                         styleClass="rounded-button ui-button-info mr-2 mb-2"
+                                         value="Readers por blog" action="readersBlogs" />
+                    </p:panel>
+                </p:panel>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+    <ui:define name="content">
+        <h2>Aplicacion CRUD en JSF Demo</h2>
+        <p>Contiene mantenimiento de Readers y Blogs.</p>
+    </ui:define>
+</ui:composition>

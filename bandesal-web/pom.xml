@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>bandesal</artifactId>
+        <groupId>sv.app.javaee</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>sv.app.javaee</groupId>
+    <artifactId>bandesal-web</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>bandesal-web</name>
+
+    <!-- Propiedades Modulo Web -->
+    <properties>
+        <javaeeweb.version>7.0</javaeeweb.version>
+        <primefaces.version>12.0.0</primefaces.version>
+        <dependency.version>2.6</dependency.version>
+        <javaee.endorsed.api>7.0</javaee.endorsed.api>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <owb.version>2.0.20</owb.version>
+    </properties>
+        
+    <!-- Dependencias Modulo Web -->
+    <dependencies>
+        <!-- Dependencias para Produccion -->
+        
+        <!-- Java EE API -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>${javaeeweb.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- Primefaces -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>${primefaces.version}</version>
+        </dependency>
+        
+        <!-- Lombok API -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        
+        <!-- Logging Log4j -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+        
+        <!-- Modulo EJB -->
+        <dependency>
+            <groupId>sv.app.javaee</groupId>
+            <artifactId>bandesal-ejb</artifactId>
+            <version>${project.version}</version>
+            <type>ejb</type>
+            <scope>provided</scope>
+        </dependency>
+            
+    </dependencies>
+    
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                <includes>
+                    <include>web.xml</include>
+                </includes>
+                <filtering>true</filtering>
+                <targetPath>${project.build.directory}</targetPath>
+            </resource>
+        </resources>
+    </build>
+
+</project>
